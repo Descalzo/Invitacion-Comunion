@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación a la Comunión</title>
+    <style>
+       body { text-align: center; font-family: 'Georgia', serif; margin: 0; padding: 0; background: #f8f9fa; }
+        h1 { background: #e6c200; padding: 20px; color: white; font-size: 2em; }
+        #countdown-container { margin: 20px; font-size: 1.5em; color: #555; }
+        #countdown { display: flex; justify-content: center; gap: 10px; margin: 20px; flex-wrap: wrap; }
+        .countdown-box { background: #e6c200; color: white; padding: 10px; border-radius: 5px; font-size: 1.5em; width: 60px; text-align: center; }
+        iframe { width: 100%; height: 300px; border: none; margin-top: 10px; }
+        .container { max-width: 90%; margin: auto; background: white; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        form { margin-top: 20px; padding: 15px; border: 1px solid #ccc; background: #fffbe6; border-radius: 8px; display: flex; flex-direction: column; align-items: center; }
+        input, button { width: 100%; max-width: 300px; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { background: #e6c200; color: white; border: none; cursor: pointer; font-size: 1.1em; }
+        button:hover { background: #d1a900; }
+        .header-image { width: 100%; height: auto; border-bottom: 5px solid #e6c200; }
+        @media (max-width: 600px) {
+            .countdown-box { width: 50px; font-size: 1.2em; }
+            h1 { font-size: 1.5em; }
+            iframe { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- <img class="header-image" src="https://source.unsplash.com/600x200/?church,ceremony" alt="Imagen de Comunión"> -->
+    <div class="container">
+	
+		
+        <h1>¡Te invitamos a la Comunión de Oliverín!</h1>
+        <p>Fecha: <strong>4 de mayo de 2025</strong></p>
+        <p>Lugar: <strong>Iglesia de Santa María</strong></p>
+		<p>Celebración: <strong>Finca el Enreo</strong></p>
+        
+		
+        
+        <h2>¿Cómo llegar?</h2>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3171.235632702918!2d-6.1946345!3d37.3727738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIyJzIyLjAiTiA2wrAxMSczMS40Ilc!5e0!3m2!1ses!2ses!4v1707768123456!5m2!1ses!2ses"
+            allowfullscreen>
+        </iframe>
+        
+        <h2>Confirma tu asistencia</h2>
+        <form action="https://formspree.io/f/xdkallgj" method="POST">
+            <input type="text" name="nombre" placeholder="Tu Nombre" required>
+            <input type="email" name="email" placeholder="Tu Correo" required>
+            <button type="submit">Confirmar Asistencia</button>
+        </form>
+		<p>Faltan</p>
+		<div id="countdown">
+			<div>
+				<div class="countdown-box" id="dias"></div>
+				<p>Días</p>
+			</div>
+			<div>
+				<div class="countdown-box" id="horas"></div>
+				<p>Horas</p>
+			</div>
+			<div>
+				<div class="countdown-box" id="minutos"></div>
+				<p>Minutos</p>
+			</div>
+			<div>
+				<div class="countdown-box" id="segundos"></div>
+				<p>Segundos</p>
+			</div>
+		</div>
+	
+    </div>
+
+    <script>
+        function actualizarCuentaRegresiva() {
+            const eventoFecha = new Date("2025-05-04T12:00:00").getTime();
+            const ahora = new Date().getTime();
+            const diferencia = eventoFecha - ahora;
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").innerHTML = dias;
+            document.getElementById("horas").innerHTML = horas;
+            document.getElementById("minutos").innerHTML = minutos;
+            document.getElementById("segundos").innerHTML = segundos;
+
+            if (diferencia < 0) {
+                document.getElementById("countdown").innerHTML = "¡La comunión ha comenzado!";
+            }
+        }
+
+        setInterval(actualizarCuentaRegresiva, 1000);
+    </script>
+</body>
+</html>
